@@ -1,74 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '../components/Card';
 
 function Subjects() {
   const [expandedSubject, setExpandedSubject] = useState(null);
+  const [subjects, setSubjects] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const subjects = [
-    {
-      name: 'Operating Systems',
-      description: 'Fundamental concepts of OS for technical interviews',
-      questions: [
-        'What is the difference between process and thread?',
-        'Explain different CPU scheduling algorithms',
-        'What is deadlock and how to prevent it?',
-        'Difference between paging and segmentation',
-        'What are semaphores and mutex?',
-        'Explain virtual memory and its advantages',
-        'What is thrashing in operating systems?',
-        'Different types of system calls'
-      ]
-    },
-    {
-      name: 'Database Management System (DBMS)',
-      description: 'Database concepts and SQL fundamentals',
-      questions: [
-        'What is normalization and its types?',
-        'Difference between SQL and NoSQL databases',
-        'Explain ACID properties in database',
-        'What are indexes and how do they work?',
-        'Different types of joins in SQL',
-        'What is a transaction in database?',
-        'Explain b-trees and b+ trees',
-        'What is database sharding?',
-        'Difference between clustered and non-clustered index'
-      ]
-    },
-    {
-      name: 'Computer Networks',
-      description: 'Network protocols and communication concepts',
-      questions: [
-        'Explain the OSI model layers',
-        'Difference between TCP and UDP',
-        'What is DNS and how does it work?',
-        'Explain HTTP vs HTTPS',
-        'What are different routing algorithms?',
-        'How does ARP protocol work?',
-        'What is a subnet and subnet mask?',
-        'Explain congestion control in networks',
-        'What is the three-way handshake?'
-      ]
-    },
-    {
-      name: 'Object-Oriented Programming (OOP)',
-      description: 'OOP principles and design patterns',
-      questions: [
-        'What are the four pillars of OOP?',
-        'Difference between abstract class and interface',
-        'Explain polymorphism with examples',
-        'What is method overloading vs overriding?',
-        'Explain different access modifiers',
-        'What are design patterns? Explain Singleton',
-        'What is composition vs inheritance?',
-        'Explain constructor and destructor',
-        'What is encapsulation and data hiding?'
-      ]
-    }
-  ];
+  useEffect(() => {
+    fetch('http://localhost:5001/subjects')
+      .then(res => res.json())
+      .then(data => {
+        // Transform object { "Subject": [questions] } to array [{ name: "Subject", questions: [questions] }]
+        const subjectsArray = Object.keys(data).map(key => ({
+          name: key,
+          questions: data[key]
+        }));
+        setSubjects(subjectsArray);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Error fetching subjects data:', err);
+        setLoading(false);
+      });
+  }, []);
 
   const handleSubjectToggle = (subject) => {
     setExpandedSubject(expandedSubject === subject ? null : subject);
   };
+
+  if (loading) {
+    return <div className="container" style={{ padding: '50px', textAlign: 'center' }}><h2>Loading Core Subjects...</h2></div>;
+  }
 
   return (
     <div className="subjects">
@@ -83,20 +45,30 @@ function Subjects() {
             <div key={index} className="subject-section">
               <Card
                 title={subject.name}
-                description={subject.description}
+                description={`${subject.questions.length} essential questions`}
                 buttonText={expandedSubject === subject ? 'Hide Questions' : 'View Questions'}
                 onButtonClick={() => handleSubjectToggle(subject)}
                 className="subject-card"
               />
-              
+
               {expandedSubject === subject && (
                 <div className="questions-container">
                   <h3>Important Interview Questions:</h3>
                   <div className="questions-list">
-                    {subject.questions.map((question, qIndex) => (
+                    {subject.questions.map((q, qIndex) => (
                       <div key={qIndex} className="question-item">
-                        <span className="question-number">Q{qIndex + 1}</span>
-                        <span className="question-text">{question}</span>
+                        <div className="question-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                          <div>
+                            <span className="question-number">Q{qIndex + 1}</span>
+                            <span className="question-text">{q.question}</span>
+                          </div>
+                          <span className="category-badge" style={{ fontSize: '0.75em', padding: '2px 8px', borderRadius: '12px', backgroundColor: '#f0f0f0', border: '1px solid #ddd' }}>
+                            {q.category}
+                          </span>
+                        </div>
+                        <p className="answer-text" style={{ paddingLeft: '40px', marginTop: '10px', fontStyle: 'italic', color: '#666' }}>
+                          <strong>A:</strong> {q.short_answer}
+                        </p>
                       </div>
                     ))}
                   </div>

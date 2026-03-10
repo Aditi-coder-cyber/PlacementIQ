@@ -1,0 +1,410 @@
+{
+    "OS": [
+        {
+            "question": "What is an Operating System?",
+            "short_answer": "An interface between hardware and user that manages resources.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is a Process?",
+            "short_answer": "A program in execution.",
+            "category": "Concept"
+        },
+        {
+            "question": "What is a Thread?",
+            "short_answer": "A lightweight process; basic unit of CPU utilization.",
+            "category": "Concept"
+        },
+        {
+            "question": "Difference between Process and Thread?",
+            "short_answer": "Process has its own memory; threads share memory of the parent process.",
+            "category": "Interview"
+        },
+        {
+            "question": "What is Deadlock?",
+            "short_answer": "A situation where processes are stuck waiting for each other's resources.",
+            "category": "Concept"
+        },
+        {
+            "question": "What are the four conditions for Deadlock?",
+            "short_answer": "Mutual Exclusion, Hold and Wait, No Preemption, Circular Wait.",
+            "category": "Interview"
+        },
+        {
+            "question": "What is Virtual Memory?",
+            "short_answer": "Memory management technique that creates an illusion of larger RAM.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is Paging?",
+            "short_answer": "Storage mechanism used to retrieve processes from secondary storage into main memory in pages.",
+            "category": "Concept"
+        },
+        {
+            "question": "What is Segmentation?",
+            "short_answer": "Memory management where memory is divided into variable-sized segments.",
+            "category": "Concept"
+        },
+        {
+            "question": "What is Thrashing?",
+            "short_answer": "A state where the system spends more time swapping pages than executing.",
+            "category": "Interview"
+        },
+        {
+            "question": "What is a System Call?",
+            "short_answer": "A way for programs to interact with the operating system kernel.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is Kernel?",
+            "short_answer": "The core part of OS that manages system resources and hardware communication.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is Context Switching?",
+            "short_answer": "Saving state of a process/thread so it can be restored and execution resumed later.",
+            "category": "Concept"
+        },
+        {
+            "question": "What is Semaphores?",
+            "short_answer": "A variable or abstract data type used to control access to a common resource.",
+            "category": "Concept"
+        },
+        {
+            "question": "Difference between Mutex and Semaphore?",
+            "short_answer": "Mutex is locking mechanism (one thread); Semaphore is signaling mechanism (multiple).",
+            "category": "Interview"
+        },
+        {
+            "question": "What is Belady's Anomaly?",
+            "short_answer": "Increasing page frames can sometimes increase page faults (in FIFO).",
+            "category": "Interview"
+        },
+        {
+            "question": "What is Demand Paging?",
+            "short_answer": "Loading pages into memory only when they are needed.",
+            "category": "Concept"
+        },
+        {
+            "question": "What is Critical Section?",
+            "short_answer": "A part of a program that accesses a shared resource.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is Round Robin Scheduling?",
+            "short_answer": "CPU scheduling algorithm where each process gets a small unit of CPU time (time quantum).",
+            "category": "Concept"
+        },
+        {
+            "question": "What is Banker's Algorithm?",
+            "short_answer": "Algotithm used for deadlock avoidance by checking resource allocation safety.",
+            "category": "Interview"
+        }
+    ],
+    "DBMS": [
+        {
+            "question": "What is DBMS?",
+            "short_answer": "Software used to manage databases.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is a Database?",
+            "short_answer": "An organized collection of structured information or data.",
+            "category": "Definition"
+        },
+        {
+            "question": "What are ACID properties?",
+            "short_answer": "Atomicity, Consistency, Isolation, Durability.",
+            "category": "Interview"
+        },
+        {
+            "question": "What is Normalization?",
+            "short_answer": "Process of organizing data to reduce redundancy and dependency.",
+            "category": "Concept"
+        },
+        {
+            "question": "What is 1NF?",
+            "short_answer": "Atomic values; no repeating groups.",
+            "category": "Interview"
+        },
+        {
+            "question": "What is 2NF?",
+            "short_answer": "1NF + no partial dependency.",
+            "category": "Interview"
+        },
+        {
+            "question": "What is 3NF?",
+            "short_answer": "2NF + no transitive dependency.",
+            "category": "Interview"
+        },
+        {
+            "question": "What is BCNF?",
+            "short_answer": "A stronger version of 3NF; every determinant is a candidate key.",
+            "category": "Interview"
+        },
+        {
+            "question": "What is a Primary Key?",
+            "short_answer": "Uniquely identifies each record in a table.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is a Foreign Key?",
+            "short_answer": "A field that refers to the primary key of another table.",
+            "category": "Definition"
+        },
+        {
+            "question": "Difference between DELETE and TRUNCATE?",
+            "short_answer": "DELETE is DML (removes rows, can rollback); TRUNCATE is DDL (removes all, faster).",
+            "category": "Interview"
+        },
+        {
+            "question": "What is a Join in SQL?",
+            "short_answer": "Clause used to combine rows from two or more tables based on a related column.",
+            "category": "Concept"
+        },
+        {
+            "question": "Types of Joins?",
+            "short_answer": "Inner, Left, Right, Full, Cross Self Join.",
+            "category": "Interview"
+        },
+        {
+            "question": "What is an Index?",
+            "short_answer": "A data structure that improves the speed of data retrieval operations.",
+            "category": "Concept"
+        },
+        {
+            "question": "What is a Transaction?",
+            "short_answer": "A sequence of operations performed as a single logical unit of work.",
+            "category": "Definition"
+        },
+        {
+            "question": "Difference between SQL and NoSQL?",
+            "short_answer": "SQL is relational/structured; NoSQL is non-relational/distributed.",
+            "category": "Interview"
+        },
+        {
+            "question": "What is Database Sharding?",
+            "short_answer": "Horizontal partitioning of data across multiple databases.",
+            "category": "Concept"
+        },
+        {
+            "question": "What is View in SQL?",
+            "short_answer": "A virtual table based on the result-set of an SQL statement.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is Stored Procedure?",
+            "short_answer": "Prepared SQL code that you can save and reuse.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is Entity-Relationship (ER) Diagram?",
+            "short_answer": "Visual representation of entities and their relationships.",
+            "category": "Concept"
+        }
+    ],
+    "CN": [
+        {
+            "question": "What is a Computer Network?",
+            "short_answer": "A set of computers connected for sharing resources.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is the OSI Model?",
+            "short_answer": "A framework describing network functions in 7 layers.",
+            "category": "Concept"
+        },
+        {
+            "question": "Name the 7 layers of OSI Model.",
+            "short_answer": "Physical, Data Link, Network, Transport, Session, Presentation, Application.",
+            "category": "Interview"
+        },
+        {
+            "question": "What is TCP/IP?",
+            "short_answer": "Suite of communication protocols used to interconnect network devices on the internet.",
+            "category": "Definition"
+        },
+        {
+            "question": "Difference between TCP and UDP?",
+            "short_answer": "TCP is connection-oriented/reliable; UDP is connectionless/fast.",
+            "category": "Interview"
+        },
+        {
+            "question": "What is an IP Address?",
+            "short_answer": "Numerical label assigned to each device connected to a network.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is DNS?",
+            "short_answer": "Domain Name System; translates domain names to IP addresses.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is HTTP vs HTTPS?",
+            "short_answer": "HTTPS is HTTP with encryption (SSL/TLS).",
+            "category": "Interview"
+        },
+        {
+            "question": "What is a Router?",
+            "short_answer": "Device that forwards data packets between computer networks.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is an ARP?",
+            "short_answer": "Address Resolution Protocol; maps IP address to MAC address.",
+            "category": "Concept"
+        },
+        {
+            "question": "What is a MAC Address?",
+            "short_answer": "Unique identifier assigned to a network interface controller (NIC).",
+            "category": "Definition"
+        },
+        {
+            "question": "What is the Three-way Handshake?",
+            "short_answer": "Proccess used in TCP to establish a connection (SYN, SYN-ACK, ACK).",
+            "category": "Interview"
+        },
+        {
+            "question": "What is a Subnet?",
+            "short_answer": "A logical subdivision of an IP network.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is Latency?",
+            "short_answer": "The time it takes for data to travel from source to destination.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is Bandwidth?",
+            "short_answer": "The maximum rate of data transfer across a network path.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is a Gateway?",
+            "short_answer": "A node that serves as an entrance to another network.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is DHCP?",
+            "short_answer": "Dynamic Host Configuration Protocol; assigns IP addresses dynamically.",
+            "category": "Concept"
+        },
+        {
+            "question": "What is ICMP?",
+            "short_answer": "Internet Control Message Protocol; used for error reporting (e.g., Ping).",
+            "category": "Concept"
+        },
+        {
+            "question": "What is Firewall?",
+            "short_answer": "A network security system that monitors and controls traffic.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is VPN?",
+            "short_answer": "Virtual Private Network; creates a secure connection over public network.",
+            "category": "Definition"
+        }
+    ],
+    "OOP": [
+        {
+            "question": "What is OOP?",
+            "short_answer": "Programming paradigm based on objects and classes.",
+            "category": "Definition"
+        },
+        {
+            "question": "Name the 4 pillars of OOP.",
+            "short_answer": "Encapsulation, Abstraction, Inheritance, Polymorphism.",
+            "category": "Interview"
+        },
+        {
+            "question": "What is a Class?",
+            "short_answer": "A blueprint or template for creating objects.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is an Object?",
+            "short_answer": "A real-world entity; an instance of a class.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is Encapsulation?",
+            "short_answer": "Wrapping data and methods together; hiding internal state.",
+            "category": "Concept"
+        },
+        {
+            "question": "What is Abstraction?",
+            "short_answer": "Hiding implementation details and showing only functionality.",
+            "category": "Concept"
+        },
+        {
+            "question": "What is Inheritance?",
+            "short_answer": "Mechanism where one class acquires properties of another.",
+            "category": "Concept"
+        },
+        {
+            "question": "What is Polymorphism?",
+            "short_answer": "The ability of an object to take many forms (e.g., overading/overloading).",
+            "category": "Concept"
+        },
+        {
+            "question": "Compile-time vs Runtime Polymorphism?",
+            "short_answer": "Compile-time (Overloading); Runtime (Overriding).",
+            "category": "Interview"
+        },
+        {
+            "question": "What is Method Overloading?",
+            "short_answer": "Multiple methods with same name but different parameters.",
+            "category": "Interview"
+        },
+        {
+            "question": "What is Method Overriding?",
+            "short_answer": "Redefining a base class method in a derived class.",
+            "category": "Interview"
+        },
+        {
+            "question": "What is an Abstract Class?",
+            "short_answer": "A class that cannot be instantiated; may contain abstract methods.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is an Interface?",
+            "short_answer": "A contract that defines methods a class must implement.",
+            "category": "Definition"
+        },
+        {
+            "question": "Difference between Abstract Class and Interface?",
+            "short_answer": "Abstract class can have state/impl; Interface can only have method signatures.",
+            "category": "Interview"
+        },
+        {
+            "question": "What is a Constructor?",
+            "short_answer": "Special method called when an object is instantiated.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is a Destructor?",
+            "short_answer": "Special method called when an object is destroyed.",
+            "category": "Definition"
+        },
+        {
+            "question": "What is 'this' keyword?",
+            "short_answer": "A reference to the current object instance.",
+            "category": "Concept"
+        },
+        {
+            "question": "What is 'super' or 'base' keyword?",
+            "short_answer": "Reference to the parent class object.",
+            "category": "Concept"
+        },
+        {
+            "question": "What is Access Modifiers?",
+            "short_answer": "Keywords used to set visibility of classes/members (public, private, protected).",
+            "category": "Concept"
+        },
+        {
+            "question": "What is Composition?",
+            "short_answer": "Designing classes by grouping objects of other classes ('has-a' relationship).",
+            "category": "Interview"
+        }
+    ]
+}

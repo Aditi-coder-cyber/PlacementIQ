@@ -1,85 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '../components/Card';
 
 function DSA() {
   const [selectedTopic, setSelectedTopic] = useState(null);
+  const [dsaTopics, setDsaTopics] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const dsaTopics = [
-    {
-      name: 'Arrays',
-      problems: [
-        'Two Sum',
-        'Maximum Subarray',
-        'Merge Intervals',
-        'Best Time to Buy and Sell Stock',
-        'Product of Array Except Self'
-      ]
-    },
-    {
-      name: 'Strings',
-      problems: [
-        'Valid Anagram',
-        'Longest Substring Without Repeating Characters',
-        'Valid Parentheses',
-        'Palindromic Substrings',
-        'Group Anagrams'
-      ]
-    },
-    {
-      name: 'Linked List',
-      problems: [
-        'Reverse Linked List',
-        'Detect Cycle in Linked List',
-        'Merge Two Sorted Lists',
-        'Remove Nth Node From End',
-        'Intersection of Two Linked Lists'
-      ]
-    },
-    {
-      name: 'Stack',
-      problems: [
-        'Valid Parentheses',
-        'Min Stack',
-        'Evaluate Reverse Polish Notation',
-        'Daily Temperatures',
-        'Largest Rectangle in Histogram'
-      ]
-    },
-    {
-      name: 'Queue',
-      problems: [
-        'Implement Queue using Stacks',
-        'Sliding Window Maximum',
-        'Design Circular Queue',
-        'Moving Average from Data Stream',
-        'First Unique Character in String'
-      ]
-    },
-    {
-      name: 'Trees',
-      problems: [
-        'Binary Tree Inorder Traversal',
-        'Maximum Depth of Binary Tree',
-        'Validate Binary Search Tree',
-        'Lowest Common Ancestor',
-        'Binary Tree Level Order Traversal'
-      ]
-    },
-    {
-      name: 'Graphs',
-      problems: [
-        'Number of Islands',
-        'Course Schedule',
-        'Clone Graph',
-        'Pacific Atlantic Water Flow',
-        'Word Ladder'
-      ]
-    }
-  ];
+  useEffect(() => {
+    fetch('http://localhost:5001/dsa')
+      .then(res => res.json())
+      .then(data => {
+        // Transform object { "Topic": [problems] } to array [{ name: "Topic", problems: [problems] }]
+        const topicsArray = Object.keys(data).map(key => ({
+          name: key,
+          problems: data[key]
+        }));
+        setDsaTopics(topicsArray);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Error fetching DSA data:', err);
+        setLoading(false);
+      });
+  }, []);
 
   const handleTopicClick = (topic) => {
     setSelectedTopic(selectedTopic === topic ? null : topic);
   };
+
+  if (loading) {
+    return <div className="container" style={{ padding: '50px', textAlign: 'center' }}><h2>Loading DSA Content...</h2></div>;
+  }
 
   return (
     <div className="dsa">
@@ -107,8 +58,21 @@ function DSA() {
                       {topic.problems.map((problem, problemIndex) => (
                         <li key={problemIndex} className="problem-item">
                           <span className="problem-number">{problemIndex + 1}.</span>
-                          <span className="problem-name">{problem}</span>
-                          <span className="difficulty easy">Easy</span>
+                          <a
+                            href={problem.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="problem-name"
+                            style={{ color: 'inherit', textDecoration: 'none' }}
+                          >
+                            {problem.title}
+                          </a>
+                          <span className="platform-tag" style={{ marginLeft: '10px', fontSize: '0.8em', backgroundColor: '#e0e0e0', padding: '2px 6px', borderRadius: '4px', color: '#555' }}>
+                            {problem.platform}
+                          </span>
+                          <span className={`difficulty ${problem.difficulty.toLowerCase()}`}>
+                            {problem.difficulty}
+                          </span>
                         </li>
                       ))}
                     </ul>
