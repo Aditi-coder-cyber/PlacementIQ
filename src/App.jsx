@@ -7,6 +7,9 @@ import DSA from './pages/DSA';
 import Subjects from './pages/Subjects';
 import Resume from './pages/Resume';
 import Interview from './pages/Interview';
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import Admin from "./pages/Admin";
 
 function App() {
   return (
@@ -20,6 +23,9 @@ function App() {
             <Route path="/subjects" element={<Subjects />} />
             <Route path="/resume" element={<Resume />} />
             <Route path="/interview" element={<Interview />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </main>
         <Footer />
