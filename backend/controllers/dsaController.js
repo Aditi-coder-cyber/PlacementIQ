@@ -1,34 +1,34 @@
-import fs from 'fs-extra';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const dataPath = path.join(__dirname, '../data/dsa.json');
+import DSA from '../models/DSA.js';
 
 export const getAllTopics = async (req, res) => {
   try {
-    const data = await fs.readJson(dataPath);
-    res.json(data);
+    const data = await DSA.find();
+    
+    // Transform data to match previous JSON structure { "Topic": [problems] }
+    const formattedData = {};
+    data.forEach(item => {
+      formattedData[item.topic] = item.problems;
+    });
+
+    res.json(formattedData);
   } catch (error) {
-    res.status(500).json({ message: 'Error reading DSA data', error });
+    res.status(500).json({ message: 'Error fetching DSA data', error: error.message });
   }
 };
 
 export const getTopicProblems = async (req, res) => {
   try {
     const { topic } = req.params;
-    const data = await fs.readJson(dataPath);
-    
     // Case insensitive search for topic
-    const topicKey = Object.keys(data).find(k => k.toLowerCase() === topic.toLowerCase());
+    const topicData = await DSA.findOne({ topic: new RegExp('^' + topic + '$', 'i') });
     
-    if (topicKey && data[topicKey]) {
-      res.json(data[topicKey]);
+    if (topicData) {
+      res.json(topicData.problems);
     } else {
       res.status(404).json({ message: `Topic ${topic} not found` });
     }
   } catch (error) {
-    res.status(500).json({ message: 'Error reading DSA data', error });
+    res.status(500).json({ message: 'Error fetching topic data', error: error.message });
   }
 };
 
@@ -39,25 +39,25 @@ export const addProblem = async (req, res) => {
       return res.status(400).json({ message: 'Topic and title are required' });
     }
 
-    const data = await fs.readJson(dataPath);
+    let topicData = await DSA.findOne({ topic: new RegExp('^' + topic + '$', 'i') });
     
-    // Find topic key (case insensitive) or create new
-    let topicKey = Object.keys(data).find(k => k.toLowerCase() === topic.toLowerCase());
-    
-    if (!topicKey) {
-      topicKey = topic;
-      data[topicKey] = [];
+    if (!topicData) {
+      // Create new topic if it doesn't exist
+      topicData = new DSA({
+        topic,
+        problems: []
+      });
     }
 
-    data[topicKey].push({
+    topicData.problems.push({
       title,
       difficulty: difficulty || 'Medium',
       link: link || '#'
     });
 
-    await fs.writeJson(dataPath, data, { spaces: 2 });
-    res.status(201).json({ message: 'Problem added successfully', topic: topicKey });
+    await topicData.save();
+    res.status(201).json({ message: 'Problem added successfully', topic: topicData.topic });
   } catch (error) {
-    res.status(500).json({ message: 'Error updating DSA data', error });
+    res.status(500).json({ message: 'Error updating DSA data', error: error.message });
   }
 };

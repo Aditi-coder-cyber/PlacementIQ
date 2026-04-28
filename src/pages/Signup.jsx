@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { User, Mail, Lock, ArrowRight, Loader2 } from "lucide-react";
 
@@ -7,6 +7,13 @@ function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            window.location.href = "/";
+        }
+    }, []);
 
     const handleSignup = async (e) => {
         e.preventDefault();
@@ -18,7 +25,13 @@ function Signup() {
                 body: JSON.stringify({ name, email, password })
             });
             const data = await res.json();
-            alert(data.message);
+            
+            if (res.ok) {
+                alert("Account created successfully! Please login.");
+                window.location.href = "/login";
+            } else {
+                alert(data.message || "Signup failed");
+            }
         } catch (err) {
             alert("Something went wrong. Please try again.");
         } finally {

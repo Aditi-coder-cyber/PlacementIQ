@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Mail, Lock, ArrowRight, Loader2 } from "lucide-react";
 
@@ -6,6 +6,13 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            window.location.href = "/";
+        }
+    }, []);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -17,7 +24,14 @@ function Login() {
                 body: JSON.stringify({ email, password })
             });
             const data = await res.json();
-            alert(data.message);
+            
+            if (res.ok) {
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("user", JSON.stringify(data.user));
+                window.location.href = "/";
+            } else {
+                alert(data.message || "Login failed");
+            }
         } catch (err) {
             alert("Something went wrong. Please try again.");
         } finally {
