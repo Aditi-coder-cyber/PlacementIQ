@@ -11,6 +11,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
 import Dashboard from "./pages/Dashboard";
+import GoogleSuccess from "./pages/GoogleSuccess";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
                 </ProtectedRoute>
               } 
             />
+            <Route path="/google-success" element={<GoogleSuccess />} />
           </Routes>
         </main>
         <Footer />
